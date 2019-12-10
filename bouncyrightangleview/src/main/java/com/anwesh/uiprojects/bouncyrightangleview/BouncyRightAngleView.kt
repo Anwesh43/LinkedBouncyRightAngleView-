@@ -33,7 +33,7 @@ fun Canvas.drawBouncyRightAngle(scale : Float, size : Float, h : Float, paint : 
     drawLine(0f, 0f, size, 0f, paint)
     restore()
     save()
-    translate(0f, (h / 2 - size) * sc)
+    translate(size, (h / 2 - size) * sc)
     drawLine(0f, 0f, 0f, size, paint)
     restore()
 }
