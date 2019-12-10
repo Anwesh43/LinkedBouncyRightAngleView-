@@ -160,7 +160,7 @@ class BouncyRightAngleView(ctx : Context) : View(ctx) {
     }
 
 
-    data class BoucnyRightAngle(var i : Int) {
+    data class BouncyRightAngle(var i : Int) {
 
         private val root : BRANode = BRANode(0)
         private var curr : BRANode = root
@@ -181,6 +181,28 @@ class BouncyRightAngleView(ctx : Context) : View(ctx) {
 
         fun startUpdating(cb : () -> Unit) {
             curr.startUpdating(cb)
+        }
+    }
+
+    data class Renderer(var view : BouncyRightAngleView) {
+
+        private val animator : Animator = Animator(view)
+        private val brl : BouncyRightAngle = BouncyRightAngle(0)
+
+        fun renderer(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            brl.draw(canvas, paint)
+            animator.animate {
+                brl.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            brl.startUpdating {
+                animator.start()
+            }
         }
     }
 }
