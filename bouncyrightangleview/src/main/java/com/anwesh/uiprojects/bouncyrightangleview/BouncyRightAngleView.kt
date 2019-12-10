@@ -206,4 +206,13 @@ class BouncyRightAngleView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : BouncyRightAngleView {
+            val view : BouncyRightAngleView = BouncyRightAngleView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
