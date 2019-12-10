@@ -55,15 +55,16 @@ fun Canvas.drawBRANode(i : Int, scale : Float, paint : Paint) {
 class BouncyRightAngleView(ctx : Context) : View(ctx) {
 
     private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val renderer : Renderer = Renderer(this)
 
     override fun onDraw(canvas : Canvas) {
-
+        renderer.render(canvas, paint)
     }
 
     override fun onTouchEvent(event : MotionEvent) : Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN  -> {
-
+                renderer.handleTap()
             }
         }
         return true
@@ -189,7 +190,7 @@ class BouncyRightAngleView(ctx : Context) : View(ctx) {
         private val animator : Animator = Animator(view)
         private val brl : BouncyRightAngle = BouncyRightAngle(0)
 
-        fun renderer(canvas : Canvas, paint : Paint) {
+        fun render(canvas : Canvas, paint : Paint) {
             canvas.drawColor(backColor)
             brl.draw(canvas, paint)
             animator.animate {
